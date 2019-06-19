@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<head>
+    <% include partials/head.ejs %>
+
+</head>
+<header>
+    <!--from /views/partials/header.ejs-->
+    <!-- Top navigation -->
+    <!--from /views/partials/header.ejs-->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navmain">
+        <!-- Brand -->
+        <a class="navbar-brand" href="https://www.sidero.ie">Sidero</a>
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+
+        </ul>
+
+        <!-- Dropdown -->
+        <ul class="navbar-nav navsub">
+            <li class="nav-item active">
+                <a class="nav-link" href="/profile">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    <label>Options</label>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Edit Profile</a>
+                </div>
+            </li>
+        </ul>
+        </ul>
+    </nav></header>
+<body >
+<div class="container-fullwidth">
+    <div class="row">
+        <div class="col-sm">
+            <ul class="nav nav-tabs">
+                <li class="nav-item dropdown">
+                    <a class="nav-link active" data-toggle="tab" href="#search">View Employees</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#team">Create Team</a>
+
+                </li>
+
+            </ul>
+            <div id="myTabContent" class="tab-content mydiv">
+                <div class="tab-pane fade show active"  id="search">
+                    <table id="example" class="center" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Career Level</th>
+                            <th>Score</th>
+                            <th>Admin Options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% if (data) { %>
+                            <% data.forEach(function(users){%>
+                                <tr>
+                                    <td><a href="/user/<%= users.user_respondent_id%>"> <%= users.first_name %> <%=  users.last_name %></a></td>
+                                    <td><a href="/user/<%= users.user_respondent_id%>"> <%= users.email %> </td>
+                                    <td id="careerLevel"></td>
+                                    <td id="score"></td>
+                                    <td>
+                                        <div style="float:left">
+                                            <a href="/user/edit/<%= users.id %>">Edit</a> &nbsp;
+                                            <form id="deleteUser" method="post" action="/user/delete/<%= users.id %>" style="float:right">
+                                                <input type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure you want to delete <%= users.first_name %> <%=  users.last_name %>?')"/>
+                                                <input type="hidden" name="_method" value="DELETE" />
+                                            </form>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% })%>
+                        <% }%>
+                        </tbody>
+                        <tfoot>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="team">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center">
+</footer>
+<script>
+    var respondent = user_respondent_id;
+    var getData = function(respondent) {
+        $.ajax({
+            url:'/respondent',
+            data: {respondentID: respondent},
+            success: function(u) {
+                // process your data to pull out what you plan to use to update the chart
+                $("#score").append( u.score.total.score, " / ", u.score.total.maxScore);
+
+                if (u.score.total.score <= 226) {
+                    $("#careerLevel").append("Graduate");
+                }
+                if (u.score.total.score >= 227 && u.score.total.score <= 452) {
+                    $("#careerLevel").append("Engineer");
+                }
+                if (u.score.total.score >= 453 && u.score.total.score <= 678) {
+                    $("#careerLevel").append("Senior Engineer");
+                }
+                if (u.score.total.score >= 679 && u.score.total.score <= 904) {
+                    $("#careerLevel").append("Lead Engineer");
+
+                } else if (u.score.total.score >= 905 && u.score.total.score <= 1132){
+                    $("#careerLevel").append("Architect");
+                }
+            }
+        });
+    };
+
+    getData(respondent);
+</script>
+</body>

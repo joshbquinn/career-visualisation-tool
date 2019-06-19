@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+    <%include partials/head.ejs%>
+</head>
+<body>
+<div class="container">
+    <div class="mx-auto col-md-6 col-md-6">
+        <h2 class="text-center"><i class="fas fa-puzzle-piece"></i> Register</h2>
+
+        <% if(message.length > 0) { %>
+            <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+        <div class="jumbotron">
+            <div class="content">
+                <form action="/signup" method="post">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input  class="form-control" type="email" name="username" placeholder="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input class="form-control" type="password" name="password" placeholder="password">
+                    </div>
+
+                    <input class="btn btn-success btn-default" type="submit">
+                </form>
+
+                <hr>
+
+                <div class="text-center">
+                    <p class="d-block small mt-3"> <a href="/signup">Register an Account</a>.</p>
+                    <p>Go Back <a href="/">Home</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="text-center">
+    <% include partials/footer.ejs%>
+</footer>
+<%include partials/scripts.ejs%>
+</body>
+</html>

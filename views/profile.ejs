@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+    <% include partials/head.ejs %>
+</head>
+<header>
+    <% include partials/header.ejs %>
+</header>
+<body >
+<div class="container-fullwidth">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card mb-3">
+                <h3 class="card-header text-center"> Bio </h3>
+                <div class="card-body">
+                    <img class="rounded mx-auto d-block" style="height: 150px; width: 50%; display: block;" src="https://www.pngarts.com/files/3/Avatar-Transparent-Image.png" alt="Card image">
+
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Employee No:</strong> <%= user.user_respondent_id%> </li>
+                    <li class="list-group-item"><strong>Name: </strong><%= user.first_name%> <%= user.last_name%></li>
+                    <li class="list-group-item"><strong>Email:</strong> <%= user.email%>  </li>
+                    <% if(user.user_type === 2){ %>
+                    <li class="list-group-item"><strong>Total:</strong> <%= score.total.score%> / <%= score.total.maxScore%></li>
+                    <% }%>
+                    <li class="list-group-item" id="careerLevel"><strong>Career Level: </strong> </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-sm">
+            <ul class="nav nav-tabs">
+                <li class="nav-item dropdown">
+                    <a class="nav-link active" data-toggle="tab" href="#charts">My Charts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#quiz">My Quiz Responses</a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#courses">My Pluralsight Courses</a>
+                </li>
+
+            </ul>
+            <div id="myTabContent" class="tab-content mydiv">
+                <div class="tab-pane fade show active"  id="charts">
+                    <canvas id="myChart" class=""></canvas>
+                </div>
+                <div class="tab-pane fade" id="quiz">
+                    <p>This is where the users's quiz responses should go</p>
+
+                </div>
+                <div class="tab-pane fade" id="courses">
+                    <p>This is where the pluralsight recomendations should go</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center">
+    <% include partials/footer.ejs %>
+</footer>
+
+<%include partials/scripts.ejs %>
+<script src="/public/javascripts/getUserGraph.js"> </script>
+<script src="/public/javascripts/getCareerLevel.js"> </script>
+<script src="/public/javascripts/getUserResponses.js"></script>
+<script src="/public/javascripts/getQuestions.js"></script>
+</body>
