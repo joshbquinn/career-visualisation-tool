@@ -41,7 +41,7 @@ var getData = function() {
     $.ajax({
         url:'/me',
         success: function(u) {
-            // process your data to pull out what you plan to use to update the chart
+            // process date to update the chart
             myChart.data.datasets[0].data = [
                     percentage(u.score.cat1Total.score, u.score.cat1Total.maxScore),
                     percentage(u.score.cat2Total.score,u.score.cat2Total.maxScore),

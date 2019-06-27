@@ -1,6 +1,6 @@
-'user strict'
+'use strict';
 
-const connecton = require('../../configurations/database');
+const connection = require('../../configurations/database');
 
 const Category = function(category) {
     this.id = category.id;
@@ -10,7 +10,7 @@ const Category = function(category) {
 };
 
 Category.getCategoryDetails = function(result) {
-    connecton.query("SELECT * FROM assessment_category", function (err, sqlResult){
+    connection.query("SELECT * FROM assessment_category", function (err, sqlResult){
         if(err){
             console.log("Error: ", err);
             result(err, null);

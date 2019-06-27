@@ -1,3 +1,5 @@
+'use strict';
+
 const connection = require('../../configurations/database.js');
 
 const Respondent = function(respondent){
@@ -10,31 +12,41 @@ const Respondent = function(respondent){
     this.score = respondent.score;
 };
 
-Respondent.updateRespondentTotalScore = function (score, respondent_id, result) {
-    connection.query("UPDATE respondnent SET score = ? WHERE respondent_id = ?", [score, respondent_id],
+Respondent.updateRespondentTotalScore = function (respondent_id, score, result) {
+    connection.query("UPDATE respondnent SET score = ? WHERE respondent_id = ?", [respondent_id, score],
         function (err, sqlResult){
-
+        console.log(sqlResult)
             if(err){
                 console.log("error: ", err);
                 result(null, err);
             }
-            else{
+            else if (sqlResult[0] === null || sqlResult[0] === undefined || !sqlResult[0]){
                 result(null, sqlResult);
             }
+            else {
+                console.log("Respondent score exists in row");
+                result(null)
+            }
+
         });
 };
 
-Respondent.updateRespondentCareerLevel = function (career_level, respondent_id, result) {
-    connection.query("UPDATE respondnent SET career_level = ? WHERE respondent_id = ?", [career_level, respondent_id],
+Respondent.updateRespondentCareerLevel = function (respondent_id, career_level, result) {
+    connection.query("UPDATE respondnent SET career_level = ? WHERE respondent_id = ?", [respondent_id, career_level],
         function (err, sqlResult){
 
             if(err){
                 console.log("error: ", err);
                 result(null, err);
             }
-            else{
+            else if (sqlResult[0] === null || sqlResult[0] === undefined || !sqlResult[0]){
                 result(null, sqlResult);
             }
+            else {
+                console.log("Respondent career level value exists in row");
+                result(null)
+            }
+
         });
 };
 
@@ -78,4 +90,7 @@ Respondent.getUserByRespondentId = function getUser(respondentId, result) {
         }
     });
 };
+
+
+
 module.exports = Respondent;

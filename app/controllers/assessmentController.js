@@ -1,25 +1,27 @@
-const categoryModel = require('../models/categoryModel');
-const categoryQuestionModel = require('../models/categoryQuestionModel');
-const responseModel = require('../models/responseModel');
-const scoreModel = require('../models/scoreModel');
+'use strict';
+
+const Category = require('../models/categoryModel');
+const Question = require('../models/categoryQuestionModel');
+const Response = require('../models/responseModel');
+const Score = require('../models/scoreModel');
 
 
 exports.get_category_details = function(req, res) {
-    categoryModel.getCategoryDetails(function (categoryDetails) {
+    Category.getCategoryDetails(function (categoryDetails) {
         res.send(JSON.stringify({categoryDetails}
         ))
     })
 };
 
 exports.get_question_details = function (req, res) {
-    categoryQuestionModel.getAllCategoryQuestions( function (questions) {
+    Question.getAllCategoryQuestions( function (questions) {
         res.send(JSON.stringify({questions}
         ))
     })
 };
 
 exports.get_user_assessment_responses = function(req, res){
-    responseModel.getUserResponses(req.user.user_respondent_id,
+    Response.getUserResponses(req.user.user_respondent_id,
         function (sqlResult) {
             //Create array of values
             Object.keys(sqlResult).forEach(function(key) {
@@ -32,7 +34,7 @@ exports.get_user_assessment_responses = function(req, res){
 };
 
 exports.get_user_scores = function(respondentID, result) {
-    scoreModel.getUserScore(respondentID, function (sqlResult) {
+    Score.getUserScore(respondentID, function (sqlResult) {
         //parse values to array
         Object.keys(sqlResult).forEach(function(key) {
             let values = sqlResult[key];
@@ -47,15 +49,15 @@ exports.get_user_scores = function(respondentID, result) {
             let category7 = scoreArray.slice(28,32);
             let category8 = scoreArray.slice(33,38);
 
-            var cat1Total = totalScore(category1);
-            var cat2Total = totalScore(category2);
-            var cat3Total = totalScore(category3);
-            var cat4Total = totalScore(category4);
-            var cat5Total = totalScore(category5);
-            var cat6Total = totalScore(category6);
-            var cat7Total = totalScore(category7);
-            var cat8Total = totalScore(category8);
-            var total = totalScore(scoreArray);
+            let cat1Total = totalScore(category1);
+            let cat2Total = totalScore(category2);
+            let cat3Total = totalScore(category3);
+            let cat4Total = totalScore(category4);
+            let cat5Total = totalScore(category5);
+            let cat6Total = totalScore(category6);
+            let cat7Total = totalScore(category7);
+            let cat8Total = totalScore(category8);
+            let total = totalScore(scoreArray);
 
             let categories = {cat1Total, cat2Total, cat3Total, cat4Total, cat5Total, cat6Total, cat7Total, cat8Total, total};
 
@@ -78,3 +80,4 @@ exports.get_user_scores = function(respondentID, result) {
         });
     })
 };
+

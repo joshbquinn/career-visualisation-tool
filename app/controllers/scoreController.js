@@ -1,8 +1,10 @@
-const scoreModel = require('../models/scoreModel');
+'use strict';
+
+const Score = require('../models/scoreModel');
 
 
 exports.get_user_scores = function(respondentID, result) {
-    scoreModel.getUserScore(respondentID, function (sqlResult) {
+    Score.getUserScore(respondentID, function (sqlResult) {
         getValues(sqlResult, function (scoreArray) {
             sliceScoreArray(scoreArray, function (allCategoryScores) {
                 result(allCategoryScores)
@@ -23,7 +25,7 @@ exports.get_user_scores = function(respondentID, result) {
 
         }
 
-//slice score array into categories
+        //slice score array into categories
         function sliceScoreArray(scoreArray, result){
             let category1 = scoreArray.slice(0,7);
             let category2 = scoreArray.slice(8,11);

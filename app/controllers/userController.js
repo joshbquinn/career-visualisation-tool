@@ -40,22 +40,21 @@ exports.read_a_user = function(req, res) {
             res.send(err);
         }
         else {
-            res.render('manageUser.ejs', {respondent});
-            console.log("Controller ", respondent)
+            res.render('administration.ejs', {respondent});
         }
     });
 };
 
 
 
-exports.list_all_users = function(req, res, next) {
+exports.list_all_users = function(req, res) {
     User.getAllUsers(function(err, employees) {
         console.log('get all users controller');
         if (err) {
             res.send(err);
         }
         else
-            console.log('Ressponse Successful');
+            console.log('Response Successful');
         res.render('manager.ejs', {user:req.user, data: employees});
     });
 };

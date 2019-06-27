@@ -1,6 +1,6 @@
-'user strict'
+'use strict';
 
-const connecton = require('../../configurations/database');
+const connection = require('../../configurations/database');
 
 const Question = function(question) {
     this.id = question.id;
@@ -10,7 +10,7 @@ const Question = function(question) {
 };
 
 Question.getCategoryQuestions = function(categoryId, result) {
-    connecton.query("SELECT * FROM assessment_category_question WHERE category_id = ?", [categoryId], function (err, sqlResult){
+    connection.query("SELECT * FROM assessment_category_question WHERE category_id = ?", [categoryId], function (err, sqlResult){
         if(err){
             console.log("Error: ", err);
             result(err, null);
@@ -22,7 +22,7 @@ Question.getCategoryQuestions = function(categoryId, result) {
 };
 
 Question.getAllCategoryQuestions = function(result) {
-    connecton.query("SELECT * FROM assessment_category_question", function (err, sqlResult){
+    connection.query("SELECT * FROM assessment_category_question", function (err, sqlResult){
         if(err){
             console.log("Error: ", err);
             result(err, null);

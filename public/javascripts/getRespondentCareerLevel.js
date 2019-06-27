@@ -1,3 +1,5 @@
+/*Determine the career level of the respondent*/
+
 var urlParams = window.location.href;
 var respondentID = urlParams.split('/').pop()
 

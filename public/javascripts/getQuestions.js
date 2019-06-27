@@ -1,3 +1,5 @@
+/*Get all questions from assessment*/
+
 var getQuestions = function() {
     $.ajax({
         url: '/questions',

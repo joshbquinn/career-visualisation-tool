@@ -1,4 +1,4 @@
-var getCareerLevel = function() {
+var getUserCareerLevel = function() {
     $.ajax({
         url: '/me',
         success: function (u) {
@@ -24,6 +24,6 @@ var getCareerLevel = function() {
     });
 };
 
-getCareerLevel();
+getUserCareerLevel();
 
 

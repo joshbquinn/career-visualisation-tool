@@ -27,11 +27,14 @@
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Edit Profile</a>
+                    <a class="dropdown-item" href="/logout">Log Out</a>
                 </div>
             </li>
         </ul>
         </ul>
-    </nav></header>
+    </nav>
+</header>
+
 <body >
 <div class="container-fullwidth">
     <div class="row">
@@ -41,7 +44,7 @@
                     <a class="nav-link active" data-toggle="tab" href="#search">View Employees</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#team">Create Team</a>
+                    <a class="nav-link" data-toggle="tab" href="#team">View Teams</a>
 
                 </li>
 
@@ -55,7 +58,10 @@
                             <th>Email</th>
                             <th>Career Level</th>
                             <th>Score</th>
+                            <% if (user.user_type === 3) {%>
+
                             <th>Admin Options</th>
+                            <% }%>
                         </tr>
                         </thead>
                         <tbody>
@@ -63,19 +69,17 @@
                             <% data.forEach(function(users){%>
                                 <tr>
                                     <td><a href="/user/<%= users.user_respondent_id%>"> <%= users.first_name %> <%=  users.last_name %></a></td>
-                                    <td><a href="/user/<%= users.user_respondent_id%>"> <%= users.email %> </td>
+                                    <td><a href="/user/<%= users.user_respondent_id%>"> <%= users.email %> </a> </td>
                                     <td id="careerLevel"></td>
                                     <td id="score"></td>
+
+                                    <% if (user.user_type === 3) {%>
                                     <td>
                                         <div style="float:left">
                                             <a href="/user/edit/<%= users.id %>">Edit</a> &nbsp;
-                                            <form id="deleteUser" method="post" action="/user/delete/<%= users.id %>" style="float:right">
-                                                <input type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure you want to delete <%= users.first_name %> <%=  users.last_name %>?')"/>
-                                                <input type="hidden" name="_method" value="DELETE" />
-                                            </form>
-
                                         </div>
                                     </td>
+                                    <% } %>
                                 </tr>
                             <% })%>
                         <% }%>
@@ -94,35 +98,8 @@
 
 <footer class="text-center">
 </footer>
-<script>
-    var respondent = user_respondent_id;
-    var getData = function(respondent) {
-        $.ajax({
-            url:'/respondent',
-            data: {respondentID: respondent},
-            success: function(u) {
-                // process your data to pull out what you plan to use to update the chart
-                $("#score").append( u.score.total.score, " / ", u.score.total.maxScore);
 
-                if (u.score.total.score <= 226) {
-                    $("#careerLevel").append("Graduate");
-                }
-                if (u.score.total.score >= 227 && u.score.total.score <= 452) {
-                    $("#careerLevel").append("Engineer");
-                }
-                if (u.score.total.score >= 453 && u.score.total.score <= 678) {
-                    $("#careerLevel").append("Senior Engineer");
-                }
-                if (u.score.total.score >= 679 && u.score.total.score <= 904) {
-                    $("#careerLevel").append("Lead Engineer");
-
-                } else if (u.score.total.score >= 905 && u.score.total.score <= 1132){
-                    $("#careerLevel").append("Architect");
-                }
-            }
-        });
-    };
-
-    getData(respondent);
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>

@@ -1,4 +1,4 @@
-var getUserResponses = function() {
+var getUserTextResponses = function() {
     $.ajax({
         url: '/quiz',
         success: function (jsonQuizResponses) {
@@ -11,4 +11,4 @@ var getUserResponses = function() {
     });
 };
 
-getUserResponses();
+getUserTextResponses();

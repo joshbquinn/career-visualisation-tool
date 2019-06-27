@@ -1,3 +1,6 @@
+<!--This page is the primary page upon login for all user types-->
+<!--Different page redirection options viewable dependent on user type-->
+
 <!DOCTYPE html>
 <head>
     <% include partials/head.ejs %>
@@ -19,7 +22,7 @@
                     <li class="list-group-item"><strong>Employee No:</strong> <%= user.user_respondent_id%> </li>
                     <li class="list-group-item"><strong>Name: </strong><%= user.first_name%> <%= user.last_name%></li>
                     <li class="list-group-item"><strong>Email:</strong> <%= user.email%>  </li>
-                    <% if(user.user_type === 2){ %>
+                    <% if(user.user_type === 2 ){ %>
                     <li class="list-group-item"><strong>Total:</strong> <%= score.total.score%> / <%= score.total.maxScore%></li>
                     <% }%>
                     <li class="list-group-item" id="careerLevel"><strong>Career Level: </strong> </li>
@@ -63,7 +66,7 @@
 
 <%include partials/scripts.ejs %>
 <script src="/public/javascripts/getUserGraph.js"> </script>
-<script src="/public/javascripts/getCareerLevel.js"> </script>
-<script src="/public/javascripts/getUserResponses.js"></script>
+<script src="/public/javascripts/getUserCareerLevel.js"> </script>
+<script src="/public/javascripts/getUserTextResponses.js"></script>
 <script src="/public/javascripts/getQuestions.js"></script>
 </body>

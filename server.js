@@ -18,7 +18,7 @@ const flash = require('connect-flash');
 require('./app/middleware/passport')(passport);
 
 /*Middleware stack that routes go through */
-app.use(morgan('dev'));
+app.use(morgan('dev')); // For Dev purposes
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -26,17 +26,18 @@ app.use(bodyParser.urlencoded({
 
 app.use(session({
     secret: 'justasecret',
-    resave:true,
+    resave: true,
     saveUninitialized: true
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
+app.use(flash()); // flash messages used for login page
 
 
-require('./app/routes/routes.js')(app, passport);
-require('./app/routes/assessmentRoute.js')(app, passport);
-require('./app/routes/userRoute')(app, passport);
+require('./app/routes/pageRoutes.js')(app, passport);
+require('./app/routes/assessmentDataRoutes.js')(app, passport);
+require('./app/routes/userRoutes')(app, passport);
 
 
 app.use('/public', express.static(path.join(__dirname, 'public')));

@@ -1,14 +1,13 @@
 Problems I'm encountering:
-- Null/ undefined objects being passed since modularising my code into the MVC pattern. 
-- Role redirection not working (pages unrecognised).
+- Role redirection route not working (pages unrecognised).
 - Pagination on Manger page for datatables. 
 
 
 List of things that I want to work on.
 
 Authentication:
-- Possibly reconsider the use library for authentication.
-- Instead code my own authentication to understand the full auth flow. 
+- Possibly reconsider the use of passport.js library for authentication.
+- Instead code up my own authentication to fully understand the full auth flow. 
 - Reconsider the encryption algorithm I'm using to increase security. 
 
 User Based Role Login: 
@@ -26,16 +25,15 @@ Admin Page:
 - Ensure edit user routes are only accessible by admins.
 - Create users, delete users, update user role, update password/email.
 
-Employee page: 
+Employee profile page: 
 - Improve the data chart that displays user's data. 
-- Provide more data visualtion options.
+- Provide more data visualisation options.
 - Integrate Pluralsight/HR locker APIs
 
-Pluralsight/HR Locker:
-- Provide course recomendations based on user scores. 
+Pluralsight API:
+- Provide course recommendations based on user scores. 
 
 App Structure / Design Pattern / Development
 - Improve the MVC pattern. 
 - Correct code where objects are being passed as null/undefined.
-- Create a development environment and deployment environment in my app. 
-- 
+- Create a separate development environment and deployment parameters in my app. 

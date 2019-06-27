@@ -1,3 +1,5 @@
+/*Retrieve respondent data and use to populate a chart.*/
+
 
 
 // create initial empty chart
@@ -35,10 +37,11 @@ var myChart = new Chart(ctx_live, {
     }
 });
 
+// Retrieve the specified respondent id from the table in manager.ejs
 var urlParams = window.location.href;
-var respondentID = urlParams.split('/').pop()
-// logic to get user data
+var respondentID = urlParams.split('/').pop();
 
+// logic to get user data
 var getData = function(respondent) {
     $.ajax({
         url:'/respondent',
@@ -62,9 +65,10 @@ var getData = function(respondent) {
     });
 };
 
-// get user data
+// Call function
 getData(respondentID);
 
+// Percentage function
 function percentage(number1, number2)
 {
     return ((number1/number2)*100).toFixed(2);;

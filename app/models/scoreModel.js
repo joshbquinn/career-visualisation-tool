@@ -1,3 +1,5 @@
+'use strict';
+
 const connection = require('../../configurations/database.js');
 
 // const Score = function(){
@@ -18,7 +20,7 @@ exports.getUserScore = function (respondent_id, result) {
             console.log("Error: ", err);
             result(err, null);
         } else {
-           return result(sqlResult);
+            return result(sqlResult);
         }
     });
 

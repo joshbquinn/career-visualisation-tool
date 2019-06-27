@@ -1,6 +1,6 @@
-'user strict'
+'use strict';
 
-const connecton = require('../../configurations/database');
+const connection = require('../../configurations/database');
 
 const Response = function(category) {
     this.id = category.id;
@@ -16,7 +16,7 @@ Response.getUserResponses = function(respondent_id, result){
         "FROM nodejs_login.assessment_resposne AS ar " +
         "JOIN nodejs_login.users AS u ON ar.respondent_id = u.user_respondent_id WHERE ar.respondent_id = ?";
 
-    connecton.query(responseQuery, [respondent_id], function (err, sqlResult){
+    connection.query(responseQuery, [respondent_id], function (err, sqlResult){
         if(err){
             console.log("Error: ", err);
             result(err, null);

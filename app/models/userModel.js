@@ -1,4 +1,5 @@
-'user strict';
+'use strict';
+
 const connection = require('../../configurations/database.js');
 
 //User object constructor
@@ -32,7 +33,6 @@ User.getUserById = function getUser(userId, result) {
             result(err, null);
         }
         else{
-            console.log("Model", res)
             result(null, res);
         }
     });
@@ -48,6 +48,7 @@ User.getAllUsers = function getAllUsers(result) {
             result(null, err);
         }
         else{
+            console.log("All users retrieved.")
             result(null, res);
         }
     });
