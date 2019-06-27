@@ -1,14 +1,18 @@
 Problems I'm encountering:
-- Role redirection route not working (pages unrecognised).
-- Pagination on Manger page for datatables. 
+- roleRedirect function in /app/utilities/roleCheck.js not working - think this has something to do with using passport.js.
 
+- trouble using jQuery to create paginated datatables. 
 
-List of things that I want to work on.
+- updating all users scores and careerlevels in the respondents table in database (specifically the score and careelevel rows) 
+upon redirecting to manager page. Wanted to do this instead of doing it manually. 
+Something like, if table row empty update row. (/app/controllers/respondentController.js)
+
+List of things that I think need to be worked on.
 
 Authentication:
 - Possibly reconsider the use of passport.js library for authentication.
 - Instead code up my own authentication to fully understand the full auth flow. 
-- Reconsider the encryption algorithm I'm using to increase security. 
+- Reconsider the password encryption algorithm I'm using to increase security. 
 
 User Based Role Login: 
 - Implement a working page redirection depending on role of user upon login. 
@@ -17,11 +21,11 @@ User Based Role Login:
 Manager Page: 
 - Create a paginated data table that displays all employees in the database.
 - Make the names of these employees clickable to redirect to their profile. 
-- Ensure that these routes can only be view by managers. 
+- Ensure that these routes can only be viewed by managers. 
 
 Admin Page:
 - Implement the same data table of Employees for admins. 
-- Embed links beside each employee to redirect to an edit user page, or delete user.
+- Embed links beside each employee to redirect to an edit user, or delete user.
 - Ensure edit user routes are only accessible by admins.
 - Create users, delete users, update user role, update password/email.
 
@@ -35,5 +39,6 @@ Pluralsight API:
 
 App Structure / Design Pattern / Development
 - Improve the MVC pattern. 
-- Correct code where objects are being passed as null/undefined.
+- Correct code where objects are being passed as null/undefined
+    - This was happening when trying to update the respondent table with user scores and career levels. 
 - Create a separate development environment and deployment parameters in my app. 
